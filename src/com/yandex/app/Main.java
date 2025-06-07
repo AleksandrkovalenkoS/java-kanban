@@ -1,3 +1,6 @@
+import com.yandex.app.service.*;
+import com.yandex.app.model.*;
+
 public class Main {
     public static void main(String[] args) {
         TaskManager manager = new InMemoryTaskManager();

@@ -1,3 +1,10 @@
+package com.yandex.app.service;
+
+import com.yandex.app.model.Epic;
+import com.yandex.app.model.Progress;
+import com.yandex.app.model.Subtask;
+import com.yandex.app.model.Task;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -7,7 +14,7 @@ public class InMemoryTaskManager implements TaskManager {
     private final HashMap<Integer, Epic> epics = new HashMap<>();
     private final HashMap<Integer, Subtask> subtasks = new HashMap<>();
 
-    // Реализация методов для Task
+    // Реализация методов для com.yandex.app.model.Task
     @Override
     public ArrayList<Task> getAllTasks() {
         return new ArrayList<>(tasks.values());
