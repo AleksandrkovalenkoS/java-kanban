@@ -3,11 +3,10 @@ package com.yandex.app.service;
 import com.yandex.app.model.Epic;
 import com.yandex.app.model.Subtask;
 import com.yandex.app.model.Task;
-
 import java.util.List;
 
 public interface TaskManager {
-    // Методы для com.yandex.app.model.Task
+    // Методы для Task
     List<Task> getAllTasks();
     void deleteAllTasks();
     Task getTaskById(int id);
@@ -33,4 +32,7 @@ public interface TaskManager {
 
     // Дополнительные методы
     List<Subtask> getSubtasksByEpicId(int epicId);
+
+    // Новый метод для истории просмотров
+    List<Task> getHistory();
 }

@@ -3,7 +3,7 @@ import com.yandex.app.model.*;
 
 public class Main {
     public static void main(String[] args) {
-        TaskManager manager = new InMemoryTaskManager();
+        TaskManager manager = Managers.getDefault();
 
         // Создаем задачи
         Task task1 = new Task("Помыть посуду", "Помыть посуду после ужина", Progress.NEW);
@@ -18,30 +18,16 @@ public class Main {
         manager.createSubtask(subtask1);
         manager.createSubtask(subtask2);
 
-        // Выводим задачи
-        System.out.println("Все задачи:");
-        manager.getAllTasks().forEach(System.out::println);
+        // Получаем задачи, чтобы добавить в историю
+        manager.getTaskById(task1.getId());
+        manager.getEpicById(epic1.getId());
+        manager.getSubtaskById(subtask1.getId());
+        manager.getSubtaskById(subtask2.getId());
 
-        System.out.println("\nВсе эпики:");
-        manager.getAllEpics().forEach(System.out::println);
-
-        System.out.println("\nВсе подзадачи:");
-        manager.getAllSubtasks().forEach(System.out::println);
-
-        // Меняем статусы
-        subtask1.setStatus(Progress.IN_PROGRESS);
-        manager.updateSubtask(subtask1);
-
-        subtask2.setStatus(Progress.DONE);
-        manager.updateSubtask(subtask2);
-
-        // Проверяем статус эпика
-        System.out.println("\nСтатус эпика после изменения подзадач:");
-        System.out.println(manager.getEpicById(epic1.getId()).getStatus());
-
-        // Удаляем задачу
-        manager.deleteTask(task1.getId());
-        System.out.println("\nЗадачи после удаления:");
-        manager.getAllTasks().forEach(System.out::println);
+        // Выводим историю
+        System.out.println("История просмотров:");
+        for (Task task : manager.getHistory()) {
+            System.out.println(task);
+        }
     }
 }
