@@ -2,6 +2,7 @@ package com.yandex.app.service;
 
 import com.yandex.app.model.Task;
 import java.util.ArrayList;
+<<<<<<< HEAD
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,6 +24,14 @@ public class InMemoryHistoryManager implements HistoryManager {
     private final Map<Integer, Node> historyMap = new HashMap<>();
     private Node head;
     private Node tail;
+=======
+import java.util.LinkedList;
+import java.util.List;
+
+public class InMemoryHistoryManager implements HistoryManager {
+    private static final int MAX_HISTORY_SIZE = 10;
+    private final LinkedList<Task> history = new LinkedList<>();
+>>>>>>> main
 
     @Override
     public void add(Task task) {
@@ -30,6 +39,7 @@ public class InMemoryHistoryManager implements HistoryManager {
             return;
         }
 
+<<<<<<< HEAD
         int taskId = task.getId();
         remove(taskId);
 
@@ -45,10 +55,17 @@ public class InMemoryHistoryManager implements HistoryManager {
             removeNode(nodeToRemove);
             historyMap.remove(id);
         }
+=======
+        if (history.size() >= MAX_HISTORY_SIZE) {
+            history.removeFirst(); // Удаляем самый старый элемент
+        }
+        history.addLast(task); // Добавляем в конец
+>>>>>>> main
     }
 
     @Override
     public List<Task> getHistory() {
+<<<<<<< HEAD
         return getTasks();
     }
 
@@ -85,5 +102,8 @@ public class InMemoryHistoryManager implements HistoryManager {
         } else {
             tail = nodeToRemove.prev;
         }
+=======
+        return new ArrayList<>(history); // Возвращаем копию для защиты от изменений
+>>>>>>> main
     }
 }
