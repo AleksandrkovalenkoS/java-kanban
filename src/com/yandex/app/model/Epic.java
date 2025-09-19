@@ -1,8 +1,4 @@
 package com.yandex.app.model;
-<<<<<<< HEAD
-
-=======
-<<<<<<< HEAD
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,43 +20,14 @@ public class Epic extends Task {
         if (!subtaskIds.contains(subtaskId)) {
             subtaskIds.add(subtaskId);
         }
-=======
->>>>>>> 7dfca1849bb20ce7a99303602542284f32e595b0
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-
-public class Epic extends Task {
-    private final ArrayList<Integer> subtaskIds;
-
-    public Epic(String title, String description) {
-        super(title, description, Progress.NEW);
-        this.subtaskIds = new ArrayList<>();
-    }
-
-    public ArrayList<Integer> getSubtaskIds() {
-        return new ArrayList<>(subtaskIds);
-    }
-
-    public void addSubtaskId(int subtaskId) {
-<<<<<<< HEAD
-        if (!subtaskIds.contains(subtaskId)) {
-            subtaskIds.add(subtaskId);
-        }
-=======
         subtaskIds.add(subtaskId);
->>>>>>> main
->>>>>>> 7dfca1849bb20ce7a99303602542284f32e595b0
     }
 
     public void removeSubtaskId(int subtaskId) {
         subtaskIds.remove((Integer) subtaskId);
     }
 
-<<<<<<< HEAD
     public void clearSubtaskIds() {
-=======
-<<<<<<< HEAD
     public void clearSubtaskIds() {
         subtaskIds.clear();
     }
@@ -120,9 +87,7 @@ public class Epic extends Task {
                 '}';
     }
 }
-=======
     public void clearSubtaskIds(){
->>>>>>> 7dfca1849bb20ce7a99303602542284f32e595b0
         subtaskIds.clear();
     }
 
@@ -179,10 +144,6 @@ public class Epic extends Task {
                 ", status=" + getStatus() +
                 ", subtaskIds=" + subtaskIds +
                 '}';
+        }
     }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> main
->>>>>>> 7dfca1849bb20ce7a99303602542284f32e595b0

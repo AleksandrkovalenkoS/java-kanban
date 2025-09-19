@@ -2,10 +2,7 @@ package com.yandex.app.service;
 
 import com.yandex.app.model.Task;
 import java.util.ArrayList;
-<<<<<<< HEAD
 import java.util.HashMap;
-=======
-<<<<<<< HEAD
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,14 +24,11 @@ public class InMemoryHistoryManager implements HistoryManager {
     private final Map<Integer, Node> historyMap = new HashMap<>();
     private Node head;
     private Node tail;
-=======
 import java.util.LinkedList;
->>>>>>> 7dfca1849bb20ce7a99303602542284f32e595b0
 import java.util.List;
 import java.util.Map;
 
 public class InMemoryHistoryManager implements HistoryManager {
-<<<<<<< HEAD
 
     private static class Node {
         Task task;
@@ -51,11 +45,8 @@ public class InMemoryHistoryManager implements HistoryManager {
     private final Map<Integer, Node> historyMap = new HashMap<>();
     private Node head;
     private Node tail;
-=======
     private static final int MAX_HISTORY_SIZE = 10;
     private final LinkedList<Task> history = new LinkedList<>();
->>>>>>> main
->>>>>>> 7dfca1849bb20ce7a99303602542284f32e595b0
 
     @Override
     public void add(Task task) {
@@ -63,10 +54,6 @@ public class InMemoryHistoryManager implements HistoryManager {
             return;
         }
 
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> 7dfca1849bb20ce7a99303602542284f32e595b0
         int taskId = task.getId();
         remove(taskId);
 
@@ -81,25 +68,16 @@ public class InMemoryHistoryManager implements HistoryManager {
         if (nodeToRemove != null) {
             removeNode(nodeToRemove);
             historyMap.remove(id);
-<<<<<<< HEAD
         }
-=======
         }
-=======
         if (history.size() >= MAX_HISTORY_SIZE) {
             history.removeFirst(); // Удаляем самый старый элемент
         }
         history.addLast(task); // Добавляем в конец
->>>>>>> main
->>>>>>> 7dfca1849bb20ce7a99303602542284f32e595b0
     }
 
     @Override
     public List<Task> getHistory() {
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> 7dfca1849bb20ce7a99303602542284f32e595b0
         return getTasks();
     }
 
@@ -136,11 +114,6 @@ public class InMemoryHistoryManager implements HistoryManager {
         } else {
             tail = nodeToRemove.prev;
         }
-<<<<<<< HEAD
-=======
-=======
         return new ArrayList<>(history); // Возвращаем копию для защиты от изменений
->>>>>>> main
->>>>>>> 7dfca1849bb20ce7a99303602542284f32e595b0
     }
 }

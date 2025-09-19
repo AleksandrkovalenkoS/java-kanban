@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> 7dfca1849bb20ce7a99303602542284f32e595b0
 package com.yandex.app;
 
 import com.yandex.app.service.Managers;
@@ -11,23 +7,14 @@ import com.yandex.app.model.Epic;
 import com.yandex.app.model.Subtask;
 import com.yandex.app.model.Progress;
 import java.util.List;
-<<<<<<< HEAD
-=======
-=======
 import com.yandex.app.service.*;
 import com.yandex.app.model.*;
->>>>>>> main
->>>>>>> 7dfca1849bb20ce7a99303602542284f32e595b0
 
 public class Main {
     public static void main(String[] args) {
         TaskManager manager = Managers.getDefault();
-
-<<<<<<< HEAD
         Task task1 = new Task("Задача 1", "Описание 1", Progress.NEW);
         Task task2 = new Task("Задача 2", "Описание 2", Progress.NEW);
-=======
-<<<<<<< HEAD
         Task task1 = new Task("Задача 1", "Описание 1", Progress.NEW);
         Task task2 = new Task("Задача 2", "Описание 2", Progress.NEW);
         manager.createTask(task1);
@@ -81,10 +68,8 @@ public class Main {
             } else {
                 System.out.println("Задача: " + task.getTitle() + " (ID: " + task.getId() + ")");
             }
-=======
         // Создаем задачи
         Task task1 = new Task("Помыть посуду", "Помыть посуду после ужина", Progress.NEW);
->>>>>>> 7dfca1849bb20ce7a99303602542284f32e595b0
         manager.createTask(task1);
         manager.createTask(task2);
 
@@ -110,7 +95,6 @@ public class Main {
         manager.getSubtaskById(subtask2.getId());
         manager.getTaskById(task1.getId());
 
-<<<<<<< HEAD
         System.out.println("\n=== История после запросов ===");
         printHistory(manager.getHistory());
 
@@ -137,13 +121,10 @@ public class Main {
             } else {
                 System.out.println("Задача: " + task.getTitle() + " (ID: " + task.getId() + ")");
             }
-=======
         // Выводим историю
         System.out.println("История просмотров:");
         for (Task task : manager.getHistory()) {
             System.out.println(task);
->>>>>>> main
->>>>>>> 7dfca1849bb20ce7a99303602542284f32e595b0
         }
     }
 }
