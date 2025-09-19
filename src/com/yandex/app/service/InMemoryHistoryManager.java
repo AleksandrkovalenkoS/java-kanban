@@ -24,27 +24,6 @@ public class InMemoryHistoryManager implements HistoryManager {
     private final Map<Integer, Node> historyMap = new HashMap<>();
     private Node head;
     private Node tail;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-
-public class InMemoryHistoryManager implements HistoryManager {
-
-    private static class Node {
-        Task task;
-        Node prev;
-        Node next;
-
-        Node(Task task) {
-            this.task = task;
-            this.prev = null;
-            this.next = null;
-        }
-    }
-
-    private final Map<Integer, Node> historyMap = new HashMap<>();
-    private Node head;
-    private Node tail;
     private static final int MAX_HISTORY_SIZE = 10;
     private final LinkedList<Task> history = new LinkedList<>();
 

@@ -30,8 +30,6 @@ public interface TaskManager {
     void updateSubtask(Subtask subtask);
     void deleteSubtask(int id);
 
-    List<Subtask> getSubtasksByEpicId(int epicId);
-    List<Subtask> getSubtasksByEpicId(int epicId);
     // Дополнительные методы
     List<Subtask> getSubtasksByEpicId(int epicId);
 
