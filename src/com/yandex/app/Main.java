@@ -6,7 +6,6 @@ import com.yandex.app.model.Task;
 import com.yandex.app.model.Epic;
 import com.yandex.app.model.Subtask;
 import com.yandex.app.model.Progress;
-import java.util.List;
 
 public class Main {
 
