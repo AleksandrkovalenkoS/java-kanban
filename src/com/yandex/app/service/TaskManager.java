@@ -32,7 +32,5 @@ public interface TaskManager {
 
     // Дополнительные методы
     List<Subtask> getSubtasksByEpicId(int epicId);
-
-    // Новый метод для истории просмотров
     List<Task> getHistory();
 }
