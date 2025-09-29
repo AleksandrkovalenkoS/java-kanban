@@ -155,7 +155,9 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
             return "TASK";
         }
     }
-    
+
+    // Переопределяем методы для автоматического сохранения
+
     @Override
     public void addTask(Task task) {
         super.addTask(task);
