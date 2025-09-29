@@ -3,6 +3,7 @@ package com.yandex.app.service;
 import com.yandex.app.model.Epic;
 import com.yandex.app.model.Subtask;
 import com.yandex.app.model.Task;
+import com.yandex.app.model.Progress;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -10,7 +11,6 @@ import java.util.List;
 import java.util.Map;
 
 public class InMemoryTaskManager implements TaskManager {
-    // Изменяем с private на protected для доступа из наследников
     protected Map<Integer, Task> tasks = new HashMap<>();
     protected Map<Integer, Epic> epics = new HashMap<>();
     protected Map<Integer, Subtask> subtasks = new HashMap<>();
@@ -210,7 +210,7 @@ public class InMemoryTaskManager implements TaskManager {
 
     protected void updateEpicStatus(Epic epic) {
         if (epic == null || epic.getSubtaskIds().isEmpty()) {
-            epic.setStatus(TaskStatus.NEW);
+            epic.setStatus(Progress.NEW);
             return;
         }
 
@@ -223,21 +223,21 @@ public class InMemoryTaskManager implements TaskManager {
                 continue;
             }
 
-            TaskStatus status = subtask.getStatus();
-            if (status != TaskStatus.NEW) {
+            Progress status = subtask.getStatus();
+            if (status != Progress.NEW) {
                 allNew = false;
             }
-            if (status != TaskStatus.DONE) {
+            if (status != Progress.DONE) {
                 allDone = false;
             }
         }
 
         if (allNew) {
-            epic.setStatus(TaskStatus.NEW);
+            epic.setStatus(Progress.NEW);
         } else if (allDone) {
-            epic.setStatus(TaskStatus.DONE);
+            epic.setStatus(Progress.DONE);
         } else {
-            epic.setStatus(TaskStatus.IN_PROGRESS);
+            epic.setStatus(Progress.IN_PROGRESS);
         }
     }
 }
