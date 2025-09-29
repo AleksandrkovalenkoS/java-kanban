@@ -6,12 +6,6 @@ import com.yandex.app.model.Task;
 import com.yandex.app.model.Progress;
 
 import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 public class FileBackedTaskManager extends InMemoryTaskManager {
     private final File file;
@@ -161,9 +155,7 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
             return "TASK";
         }
     }
-
-    // Переопределяем методы для автоматического сохранения
-
+    
     @Override
     public void addTask(Task task) {
         super.addTask(task);
