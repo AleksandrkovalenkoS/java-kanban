@@ -6,48 +6,30 @@ import com.yandex.app.model.Task;
 import java.util.List;
 
 public interface TaskManager {
-
-    // Методы для Task
     List<Task> getAllTasks();
-
-    void deleteAllTasks();
-
-    Task getTaskById(int id);
-
-    Task createTask(Task task);
-
-    void updateTask(Task task);
-
-    void deleteTask(int id);
-
-    // Методы для Epic
     List<Epic> getAllEpics();
-
-    void deleteAllEpics();
-
-    Epic getEpicById(int id);
-
-    Epic createEpic(Epic epic);
-
-    void updateEpic(Epic epic);
-
-    void deleteEpic(int id);
-
-    // Методы для Subtask
     List<Subtask> getAllSubtasks();
 
+    void deleteAllTasks();
+    void deleteAllEpics();
     void deleteAllSubtasks();
 
+    Task getTaskById(int id);
+    Epic getEpicById(int id);
     Subtask getSubtaskById(int id);
 
-    Subtask createSubtask(Subtask subtask);
+    void addTask(Task task);
+    void addEpic(Epic epic);
+    void addSubtask(Subtask subtask);
 
+    void updateTask(Task task);
+    void updateEpic(Epic epic);
     void updateSubtask(Subtask subtask);
 
-    void deleteSubtask(int id);
+    void deleteTaskById(int id);
+    void deleteEpicById(int id);
+    void deleteSubtaskById(int id);
 
-    // Дополнительные методы
     List<Subtask> getSubtasksByEpicId(int epicId);
-
     List<Task> getHistory();
 }
