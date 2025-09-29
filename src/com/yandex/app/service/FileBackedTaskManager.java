@@ -21,7 +21,6 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
 
     private void loadFromFile() {
         if (!file.exists()) return;
-
         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
             String line;
             boolean isHeader = true;
@@ -42,7 +41,6 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
     private void restoreTask(Task task) {
         int id = task.getId();
         if (id >= nextId) nextId = id + 1;
-
         if (task instanceof Epic) {
             epics.put(id, (Epic) task);
         } else if (task instanceof Subtask) {
@@ -57,30 +55,25 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
     private Task fromString(String value) {
         String[] fields = value.split(",");
         if (fields.length < 5) return null;
-
         int id = Integer.parseInt(fields[0]);
         String type = fields[1];
         String name = fields[2];
         Progress status = Progress.valueOf(fields[3]);
         String description = fields[4];
-
         switch (type) {
             case "TASK":
-                Task task = new Task(name, description);
+                Task task = new Task(name, description, status);
                 task.setId(id);
-                task.setStatus(status);
                 return task;
             case "EPIC":
-                Epic epic = new Epic(name, description);
+                Epic epic = new Epic(name, description, status);
                 epic.setId(id);
-                epic.setStatus(status);
                 return epic;
             case "SUBTASK":
                 if (fields.length < 6) return null;
                 int epicId = Integer.parseInt(fields[5]);
-                Subtask subtask = new Subtask(name, description, epicId);
+                Subtask subtask = new Subtask(name, description, status, epicId);
                 subtask.setId(id);
-                subtask.setStatus(status);
                 return subtask;
             default:
                 return null;
