@@ -3,6 +3,7 @@ package com.yandex.app;
 import com.yandex.app.model.Epic;
 import com.yandex.app.model.Subtask;
 import com.yandex.app.model.Task;
+import com.yandex.app.model.Progress;
 import com.yandex.app.service.TaskManager;
 import com.yandex.app.service.FileBackedTaskManager;
 
@@ -14,16 +15,16 @@ public class Main {
         File file = new File("tasks.csv");
         TaskManager fileManager = FileBackedTaskManager.loadFromFile(file);
 
-        Task task1 = new Task("Task 1", "Description 1");
-        Task task2 = new Task("Task 2", "Description 2");
+        Task task1 = new Task("Task 1", "Description 1", Progress.NEW);
+        Task task2 = new Task("Task 2", "Description 2", Progress.NEW);
 
         fileManager.addTask(task1);
         fileManager.addTask(task2);
 
-        Epic epic1 = new Epic("Epic 1", "Epic description");
+        Epic epic1 = new Epic("Epic 1", "Epic description", Progress.NEW);
         fileManager.addEpic(epic1);
 
-        Subtask subtask1 = new Subtask("Subtask 1", "Subtask description", epic1.getId());
+        Subtask subtask1 = new Subtask("Subtask 1", "Subtask description", Progress.NEW, epic1.getId());
         fileManager.addSubtask(subtask1);
 
         System.out.println("All tasks:");
