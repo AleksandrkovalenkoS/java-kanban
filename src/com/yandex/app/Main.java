@@ -3,7 +3,6 @@ package com.yandex.app;
 import com.yandex.app.model.Epic;
 import com.yandex.app.model.Subtask;
 import com.yandex.app.model.Task;
-import com.yandex.app.model.Progress;
 import com.yandex.app.service.TaskManager;
 import com.yandex.app.service.FileBackedTaskManager;
 
