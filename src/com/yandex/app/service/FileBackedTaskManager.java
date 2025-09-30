@@ -20,7 +20,9 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
     }
 
     private void loadFromFile() {
-        if (!file.exists()) return;
+        if (!file.exists()) {
+            return;
+        }
         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
             String line;
             boolean isHeader = true;
@@ -29,9 +31,13 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
                     isHeader = false;
                     continue;
                 }
-                if (line.isEmpty()) continue;
+                if (line.isEmpty()) {
+                    continue;
+                }
                 Task task = fromString(line);
-                if (task != null) restoreTask(task);
+                if (task != null) {
+                    restoreTask(task);
+                }
             }
         } catch (IOException e) {
             throw new ManagerSaveException("Ошибка при загрузке из файла", e);
@@ -40,13 +46,17 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
 
     private void restoreTask(Task task) {
         int id = task.getId();
-        if (id >= nextId) nextId = id + 1;
+        if (id >= nextId) {
+            nextId = id + 1;
+        }
         if (task instanceof Epic) {
             epics.put(id, (Epic) task);
         } else if (task instanceof Subtask) {
             subtasks.put(id, (Subtask) task);
             Epic epic = epics.get(((Subtask) task).getEpicId());
-            if (epic != null) epic.addSubtaskId(id);
+            if (epic != null) {
+                epic.addSubtaskId(id);
+            }
         } else {
             tasks.put(id, task);
         }
@@ -54,7 +64,9 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
 
     private Task fromString(String value) {
         String[] fields = value.split(",");
-        if (fields.length < 5) return null;
+        if (fields.length < 5) {
+            return null;
+        }
         int id = Integer.parseInt(fields[0]);
         String type = fields[1];
         String name = fields[2];
@@ -62,18 +74,23 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
         String description = fields[4];
         switch (type) {
             case "TASK":
-                Task task = new Task(name, description, status);
+                Task task = new Task(name, description);
                 task.setId(id);
+                task.setStatus(status);
                 return task;
             case "EPIC":
-                Epic epic = new Epic(name, description, status);
+                Epic epic = new Epic(name, description);
                 epic.setId(id);
+                epic.setStatus(status);
                 return epic;
             case "SUBTASK":
-                if (fields.length < 6) return null;
+                if (fields.length < 6) {
+                    return null;
+                }
                 int epicId = Integer.parseInt(fields[5]);
-                Subtask subtask = new Subtask(name, description, status, epicId);
+                Subtask subtask = new Subtask(name, description, epicId);
                 subtask.setId(id);
+                subtask.setStatus(status);
                 return subtask;
             default:
                 return null;
@@ -117,9 +134,13 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
     }
 
     private String getType(Task task) {
-        if (task instanceof Epic) return "EPIC";
-        else if (task instanceof Subtask) return "SUBTASK";
-        else return "TASK";
+        if (task instanceof Epic) {
+            return "EPIC";
+        } else if (task instanceof Subtask) {
+            return "SUBTASK";
+        } else {
+            return "TASK";
+        }
     }
 
     @Override
