@@ -122,9 +122,9 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
         String[] fields = new String[]{
                 String.valueOf(task.getId()),
                 getType(task),
-                task.getName(),
+                "Task",
                 task.getStatus().name(),
-                task.getDescription()
+                "Description"
         };
         if (task instanceof Subtask) {
             Subtask subtask = (Subtask) task;
