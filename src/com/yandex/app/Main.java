@@ -21,7 +21,7 @@ public class Main {
         fileManager.addTask(task1);
         fileManager.addTask(task2);
 
-        Epic epic1 = new Epic("Epic 1", "Epic description", Progress.NEW);
+        Epic epic1 = new Epic("Epic 1", "Epic description");
         fileManager.addEpic(epic1);
 
         Subtask subtask1 = new Subtask("Subtask 1", "Subtask description", Progress.NEW, epic1.getId());
