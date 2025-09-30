@@ -15,43 +15,42 @@ public class Main {
         File file = new File("tasks.csv");
         TaskManager fileManager = FileBackedTaskManager.loadFromFile(file);
 
-        Task task1 = new Task("Task 1", "Description 1");
-        task1.setStatus(Progress.IN_PROGRESS);
-        Task task2 = new Task("Task 2", "Description 2");
+        Task task1 = new Task("Task 1", "Description 1", Progress.NEW);
+        Task task2 = new Task("Task 2", "Description 2", Progress.NEW);
 
         fileManager.addTask(task1);
         fileManager.addTask(task2);
 
-        Epic epic1 = new Epic("Epic 1", "Epic description");
+        Epic epic1 = new Epic("Epic 1", "Epic description", Progress.NEW);
         fileManager.addEpic(epic1);
 
-        Subtask subtask1 = new Subtask("Subtask 1", "Subtask description", epic1.getId());
+        Subtask subtask1 = new Subtask("Subtask 1", "Subtask description", Progress.NEW, epic1.getId());
         fileManager.addSubtask(subtask1);
 
-        System.out.println("Все задачи:");
+        System.out.println("All tasks:");
         for (Task task : fileManager.getAllTasks()) {
-            System.out.println("Task: " + task.getName() + " | Status: " + task.getStatus());
+            System.out.println("Task");
         }
 
-        System.out.println("\nВсе эпики:");
+        System.out.println("All epics:");
         for (Epic epic : fileManager.getAllEpics()) {
-            System.out.println("Epic: " + epic.getName() + " | Status: " + epic.getStatus());
+            System.out.println("Epic");
         }
 
-        System.out.println("\nВсе подзадачи:");
+        System.out.println("All subtasks:");
         for (Subtask subtask : fileManager.getAllSubtasks()) {
-            System.out.println("Subtask: " + subtask.getName() + " | Status: " + subtask.getStatus());
+            System.out.println("Subtask");
         }
 
-        System.out.println("\nИстория:");
+        System.out.println("History:");
         for (Task task : fileManager.getHistory()) {
-            System.out.println("History: " + task.getName());
+            System.out.println("History item");
         }
 
         TaskManager loadedManager = FileBackedTaskManager.loadFromFile(file);
-        System.out.println("\nЗагруженные задачи:");
+        System.out.println("Loaded tasks:");
         for (Task task : loadedManager.getAllTasks()) {
-            System.out.println("Loaded Task: " + task.getName());
+            System.out.println("Loaded task");
         }
     }
 }
