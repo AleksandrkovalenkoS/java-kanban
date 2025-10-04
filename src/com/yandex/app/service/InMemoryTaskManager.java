@@ -18,6 +18,11 @@ public class InMemoryTaskManager implements TaskManager {
                     Comparator.nullsLast(Comparator.naturalOrder())));
 
     @Override
+    public List<Subtask> getAllSubtasks() {
+        return new ArrayList<>(subtasks.values());
+    }
+
+    @Override
     public Set<Task> getPrioritizedTasks() {
         return new TreeSet<>(prioritizedTasks);
     }
