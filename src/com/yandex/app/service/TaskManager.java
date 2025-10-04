@@ -4,46 +4,34 @@ import com.yandex.app.model.Epic;
 import com.yandex.app.model.Subtask;
 import com.yandex.app.model.Task;
 import java.util.List;
+import java.util.Set;
 
 public interface TaskManager {
-
     List<Task> getAllTasks();
+    void deleteAllTasks();
+    Task getTaskById(int id);
+    Task createTask(Task task);
+    void updateTask(Task task);
+    void deleteTask(int id);
 
     List<Epic> getAllEpics();
+    void deleteAllEpics();
+    Epic getEpicById(int id);
+    Epic createEpic(Epic epic);
+    void updateEpic(Epic epic);
+    void deleteEpic(int id);
 
     List<Subtask> getAllSubtasks();
-
-    void deleteAllTasks();
-
-    void deleteAllEpics();
-
     void deleteAllSubtasks();
-
-    Task getTaskById(int id);
-
-    Epic getEpicById(int id);
-
     Subtask getSubtaskById(int id);
-
-    void addTask(Task task);
-
-    void addEpic(Epic epic);
-
-    void addSubtask(Subtask subtask);
-
-    void updateTask(Task task);
-
-    void updateEpic(Epic epic);
-
+    Subtask createSubtask(Subtask subtask);
     void updateSubtask(Subtask subtask);
-
-    void deleteTaskById(int id);
-
-    void deleteEpicById(int id);
-
-    void deleteSubtaskById(int id);
+    void deleteSubtask(int id);
 
     List<Subtask> getSubtasksByEpicId(int epicId);
-
     List<Task> getHistory();
+
+    Set<Task> getPrioritizedTasks();
+    boolean hasTimeOverlap(Task task1, Task task2);
+    boolean isTimeSlotAvailable(Task task);
 }

@@ -6,11 +6,9 @@ import com.yandex.app.model.Task;
 import com.yandex.app.model.Progress;
 import com.yandex.app.service.TaskManager;
 import com.yandex.app.service.FileBackedTaskManager;
-
 import java.io.File;
 
 public class Main {
-
     public static void main(String[] args) {
         File file = new File("tasks.csv");
         TaskManager fileManager = FileBackedTaskManager.loadFromFile(file);
@@ -18,39 +16,39 @@ public class Main {
         Task task1 = new Task("Task 1", "Description 1", Progress.NEW);
         Task task2 = new Task("Task 2", "Description 2", Progress.NEW);
 
-        fileManager.addTask(task1);
-        fileManager.addTask(task2);
+        fileManager.createTask(task1);
+        fileManager.createTask(task2);
 
         Epic epic1 = new Epic("Epic 1", "Epic description");
-        fileManager.addEpic(epic1);
+        fileManager.createEpic(epic1);
 
         Subtask subtask1 = new Subtask("Subtask 1", "Subtask description", Progress.NEW, epic1.getId());
-        fileManager.addSubtask(subtask1);
+        fileManager.createSubtask(subtask1);
 
         System.out.println("All tasks:");
         for (Task task : fileManager.getAllTasks()) {
-            System.out.println("Task");
+            System.out.println(task);
         }
 
         System.out.println("All epics:");
         for (Epic epic : fileManager.getAllEpics()) {
-            System.out.println("Epic");
+            System.out.println(epic);
         }
 
         System.out.println("All subtasks:");
         for (Subtask subtask : fileManager.getAllSubtasks()) {
-            System.out.println("Subtask");
+            System.out.println(subtask);
         }
 
         System.out.println("History:");
         for (Task task : fileManager.getHistory()) {
-            System.out.println("History item");
+            System.out.println(task);
         }
 
         TaskManager loadedManager = FileBackedTaskManager.loadFromFile(file);
         System.out.println("Loaded tasks:");
         for (Task task : loadedManager.getAllTasks()) {
-            System.out.println("Loaded task");
+            System.out.println(task);
         }
     }
 }
