@@ -5,6 +5,7 @@ import com.yandex.app.service.Managers;
 import com.yandex.app.service.TaskManager;
 import java.io.IOException;
 import java.net.InetSocketAddress;
+import java.util.concurrent.Executors;
 
 public class HttpTaskServer {
     private static final int PORT = 8080;
@@ -19,6 +20,7 @@ public class HttpTaskServer {
         this.taskManager = taskManager;
         this.server = HttpServer.create(new InetSocketAddress(PORT), 0);
         configureHandlers();
+        server.setExecutor(Executors.newCachedThreadPool());
     }
 
     private void configureHandlers() {
@@ -35,7 +37,7 @@ public class HttpTaskServer {
     }
 
     public void stop() {
-        server.stop(0);
+        server.stop(1);
         System.out.println("HTTP Task Server stopped");
     }
 
