@@ -27,8 +27,7 @@ public class InMemoryTaskManager implements TaskManager {
         return new TreeSet<>(prioritizedTasks);
     }
 
-    @Override
-    public boolean hasTimeOverlap(Task task1, Task task2) {
+    private boolean hasTimeOverlap(Task task1, Task task2) {
         if (task1.getStartTime() == null || task2.getStartTime() == null ||
                 task1.getEndTime() == null || task2.getEndTime() == null) {
             return false;
@@ -38,8 +37,7 @@ public class InMemoryTaskManager implements TaskManager {
                 task2.getStartTime().isBefore(task1.getEndTime());
     }
 
-    @Override
-    public boolean isTimeSlotAvailable(Task task) {
+    private boolean isTimeSlotAvailable(Task task) {
         if (task.getStartTime() == null) {
             return true;
         }
@@ -78,7 +76,6 @@ public class InMemoryTaskManager implements TaskManager {
             removeFromPrioritizedTasks(oldTask);
 
             if (!isTimeSlotAvailable(task)) {
-                addToPrioritizedTasks(oldTask);
                 throw new IllegalArgumentException("Время выполнения задачи пересекается с существующими задачами");
             }
 
@@ -131,7 +128,6 @@ public class InMemoryTaskManager implements TaskManager {
             removeFromPrioritizedTasks(oldSubtask);
 
             if (!isTimeSlotAvailable(subtask)) {
-                addToPrioritizedTasks(oldSubtask);
                 throw new IllegalArgumentException("Время выполнения подзадачи пересекается с существующими задачами");
             }
 
@@ -208,6 +204,8 @@ public class InMemoryTaskManager implements TaskManager {
         for (Integer subtaskId : subtasks.keySet()) {
             historyManager.remove(subtaskId);
         }
+        epics.values().forEach(this::removeFromPrioritizedTasks);
+        subtasks.values().forEach(this::removeFromPrioritizedTasks);
         epics.clear();
         subtasks.clear();
     }
@@ -242,8 +240,12 @@ public class InMemoryTaskManager implements TaskManager {
         Epic epic = epics.remove(id);
         if (epic != null) {
             historyManager.remove(id);
+            removeFromPrioritizedTasks(epic);
             for (int subtaskId : epic.getSubtaskIds()) {
-                subtasks.remove(subtaskId);
+                Subtask subtask = subtasks.remove(subtaskId);
+                if (subtask != null) {
+                    removeFromPrioritizedTasks(subtask);
+                }
                 historyManager.remove(subtaskId);
             }
         }
